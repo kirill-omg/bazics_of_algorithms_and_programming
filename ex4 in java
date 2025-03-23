@@ -1,0 +1,17 @@
+//Задание 4. Напишите программу, которая вычисляет площадь прямоугольника.
+//Пользователь вводит длину и ширину.  Юрченко Кирилл ДТН-309//
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите значение для параметра длины: ");
+        double length = scanner.nextInt();
+        System.out.print("Введите значения для параметра ширины: ");
+        double width = scanner.nextInt();
+        double area = length * width;
+        System.out.print("Площадь прямоугольника:" + area);
+
+
+        scanner.close();
+    }
+}
