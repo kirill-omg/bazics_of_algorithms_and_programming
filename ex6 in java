@@ -1,0 +1,32 @@
+//Задание 6.Напишите программу, которая вычисляет факториал целого числа,
+//введенного пользователем.  Юрченко Кирилл ДТН-309//
+import java.util.Scanner;
+public class Main {
+
+    public static long factorial(int n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        } else {
+            return n * factorial(n - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите целое число: ");
+
+        try {
+            int number = scanner.nextInt();
+            if (number < 0) {
+                System.out.println("Факториал отрицательного числа не определен.");
+            } else {
+                long result = factorial(number);
+                System.out.println("Факториал " + number + " равен " + result + ".");
+            }
+        } catch (Exception e) {
+            System.out.println("Пожалуйста, введите корректное целое число.");
+        } finally {
+            scanner.close();
+        }
+    }
+}
