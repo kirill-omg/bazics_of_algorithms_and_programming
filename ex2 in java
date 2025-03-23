@@ -1,0 +1,14 @@
+//Задание 2. Напишите программу, которая запрашивает у пользователя два целых числа и выводит их сумму. Юрченко Кирилл ДТН-309//
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите число: ");
+        int number1 = scanner.nextInt();
+        System.out.print("Введите второе число: ");
+        int number2 = scanner.nextInt();
+        int sum = number1 + number2;
+        System.out.println("Сумма: " + sum);
+        scanner.close();
+    }
+}
