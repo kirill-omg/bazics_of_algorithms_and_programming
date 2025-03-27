@@ -1,0 +1,19 @@
+//Задание 9. Напишите программу, которая принимает целое число от пользователя и
+//выводит его представление в бинарном формате.  Юрченко Кирилл ДТН-309//
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("Введите целое число: ");
+    int number = scanner.nextInt();
+    String binaryFormat = Integer.toBinaryString(number);
+
+        System.out.println("Бинарный формат числа  " + number + " равно " + binaryFormat);
+
+
+
+
+    scanner.close();
+    }
+}
