@@ -1,0 +1,15 @@
+//Задание 11. Напишите программу, которая вычисляет сумму всех целых чисел от 1 до N,
+//где N вводится пользователем.  Юрченко Кирилл ДТН-309//
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите N: ");
+        int N = scanner.nextInt();
+        int total = N * (N + 1) / 2;
+        System.out.println("Сумма: " + total);
+
+        scanner.close();
+    }
+}
