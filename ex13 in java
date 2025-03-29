@@ -1,0 +1,22 @@
+//Задание 13. Напишите программу, которая вычисляет квадратный корень из введенного
+//пользователем положительного числа. Юрченко Кирилл ДТН-309//
+
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите положительное число: ");
+        double number = scanner.nextDouble();
+
+        if (number < 0) {
+            System.out.println("Ошибка: введено отрицательное число.");
+        } else {
+            double squareRoot = Math.sqrt(number);
+            System.out.printf("Квадратный корень из %.2f равен %.2f%n", number, squareRoot);
+        }
+
+        scanner.close();
+    }
+}
