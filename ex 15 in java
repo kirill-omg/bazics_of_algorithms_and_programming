@@ -1,0 +1,21 @@
+//Задание 15. Напишите программу, которая переворачивает цифры числа, введенного
+//пользователем. Юрченко Кирилл ДТН-309//
+
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите целое число: ");
+        int number = Math.abs(scanner.nextInt());
+
+
+        String reversedStr = new StringBuilder(String.valueOf(number)).reverse().toString();
+
+     
+        int reversed = Integer.parseInt(reversedStr);
+
+        System.out.println("Перевернутое число: " + reversed);
+        scanner.close();
+    }
+}
