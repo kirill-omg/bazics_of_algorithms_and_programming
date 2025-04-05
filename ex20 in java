@@ -1,0 +1,30 @@
+//Задание 20.Напишите программу, которая генерирует случайное число в диапазоне от
+//сообщать, больше или меньше введенное число по сравнению с загаданным.
+// .Юрченко Кирилл ДТН-309
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Random random = new Random();      // Генерируем случайное число
+        int secretNumber = random.nextInt(100) + 1; // Диапазон от 1 до 100
+        Scanner scanner = new Scanner(System.in);   // Читаем данные от пользователя
+
+        System.out.println("Угадай число от 1 до 100:");
+
+        while (true) {
+            System.out.print("Ваше предположение: ");
+            int guess = scanner.nextInt();
+
+            if (guess == secretNumber) {
+                System.out.println("Верно! Вы угадали число.");
+                break;
+            } else if (guess > secretNumber) {
+                System.out.println("Загаданное число меньше вашего предположения.");
+            } else {
+                System.out.println("Загаданное число больше вашего предположения.");
+            }
+        }
+    }
+}
