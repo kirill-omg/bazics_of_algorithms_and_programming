@@ -1,0 +1,29 @@
+//Задание 17. Напишите программу, которая вычисляет НОД двух целых чисел, введенных
+//пользователем. Юрченко Кирилл ДТН-309//
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите первое целое число: ");
+        int num1 = scanner.nextInt();
+
+        System.out.print("Введите второе целое число: ");
+        int num2 = scanner.nextInt();
+
+        int result = gcd(num1, num2);
+
+        System.out.printf("Наибольший общий делитель чисел %d и %d равен %d.\n", num1, num2, result);
+    }
+
+    private static int gcd(int a, int b) {
+        while (b != 0) {
+            int temp = a % b;
+            a = b;
+            b = temp;
+        }
+        return a;
+    }
+}
