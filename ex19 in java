@@ -1,0 +1,17 @@
+//Задание 19.Напишите программу, которая изменяет знак введенного пользователем
+//числа на противоположный (положительное становится отрицательным и
+//наоборот).Юрченко Кирилл ДТН-309
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите число: ");
+        double number = scanner.nextDouble();
+
+        double changedNumber = -number;
+
+        System.out.println("Число с измененным знаком: " + changedNumber);
+    }
+}
