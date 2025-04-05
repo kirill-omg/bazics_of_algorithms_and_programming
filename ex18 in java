@@ -1,0 +1,20 @@
+//Задание 18.Напишите программу, которая находит и выводит меньшее из двух
+//введенных пользователем чисел. Юрченко Кирилл ДТН-309//
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите первое число: ");
+        double firstNumber = scanner.nextDouble();
+
+        System.out.print("Введите второе число: ");
+        double secondNumber = scanner.nextDouble();
+
+        double minNumber = Math.min(firstNumber, secondNumber);
+
+        System.out.println("Меньшее из введенных чисел: " + minNumber);
+    }
+}
