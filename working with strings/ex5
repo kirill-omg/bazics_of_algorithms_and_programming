@@ -1,0 +1,51 @@
+//Дана строка, состоящая из слов. Словом считается группа символов,
+//отделенная от других слов пробелами. Пробельных символов между
+//словами может быть несколько. Также пробелы могут быть в начале
+//строки и в ее конце. Надо построить новую строку, в которой все слова
+//будут идти в обратном порядке, а пробелы останутся на местах. Т.е.
+//строка вида “ aaa bbb cc dd” должна превратиться в “ dd cc bbb aaa”.
+public class Main {
+    public static String reverseWordsWithSpaces(String input) {
+        if (input == null) {
+            throw new IllegalArgumentException("Строка не может быть null");
+        }
+
+        char[] chars = input.toCharArray();
+        String[] words = input.trim().split("\\s+"); // получаем слова
+        int wordIndex = words.length - 1;
+
+        StringBuilder result = new StringBuilder();
+        int i = 0;
+
+        while (i < chars.length) {
+            if (chars[i] == ' ') {
+                result.append(' ');
+                i++;
+            } else {
+                // Вставляем слово только если остались слова
+                if (wordIndex >= 0) {
+                    String word = words[wordIndex--];
+                    result.append(word);
+                    i += word.length();
+
+                    // Пропускаем пробелы после слова, если есть
+                    while (i < chars.length && chars[i] == ' ') {
+                        result.append(' ');
+                        i++;
+                    }
+                } else {
+                    // На случай, если вдруг символ не пробел и слов не осталось — просто пропустить
+                    i++;
+                }
+            }
+        }
+
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        String input = "  aaa   bbb cc dd ";
+        String result = reverseWordsWithSpaces(input);
+        System.out.println("Результат: \"" + result + "\"");
+    }
+}
