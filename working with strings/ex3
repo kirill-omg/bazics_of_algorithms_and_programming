@@ -1,0 +1,37 @@
+//Постройте по строке новую строку, которая получена из исходной
+//заменой каждого символа '1' на подстроку "один”, символа ‘2’ на
+//подстроку “два” и символа ‘3’ на подстроку “три”.
+public class Main{
+    public static String replaceDigits(String input) {
+        if (input == null) {
+            throw new IllegalArgumentException("Входная строка не может быть null");
+        }
+
+        StringBuilder result = new StringBuilder();
+
+        for (char c : input.toCharArray()) {
+            switch (c) {
+                case '1':
+                    result.append("один");
+                    break;
+                case '2':
+                    result.append("два");
+                    break;
+                case '3':
+                    result.append("три");
+                    break;
+                default:
+                    result.append(c); // оставляем символ без изменений
+            }
+        }
+
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        String input = "123456";
+        String output = replaceDigits(input);
+        System.out.println("Результат: " + output);
+    }
+}
+
