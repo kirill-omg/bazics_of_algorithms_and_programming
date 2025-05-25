@@ -1,0 +1,25 @@
+//На входе две строки. Результат — количество вхождений второй строки в
+//первую. Если вторая строка пустая или null, выбросить исключение.
+public class Main {
+    public static int countOccurrences(String text, String sub) {
+        if (sub == null || sub.isEmpty()) {
+            throw new IllegalArgumentException("Строка для поиска не может быть пустой или null");
+        }
+
+        int count = 0;
+        int index = 0;
+
+        while ((index = text.indexOf(sub, index)) != -1) {
+            count++;
+            index += sub.length(); // Смещаемся на длину подстроки
+        }
+
+        return count;
+    }
+
+    public static void main(String[] args) {
+        String text = "fuckfuckfuckfuck";
+        String sub = "fu";
+        System.out.println("Количество вхождений: " + countOccurrences(text, sub));
+    }
+}
