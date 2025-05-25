@@ -1,0 +1,33 @@
+//Строка содержит подстроки вида 0xNNNNNNNN, где N —
+//шестнадцатеричная цифра. Постройте новую строку, в которой все
+//шестнадцатеричные числа будут заменены на десятичные эквиваленты
+//(например, строка «Васе 0x00000010 лет» должна превратиться в строку
+//«Васе 16 лет»).
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Main {
+    public static String replaceHexWithDecimal(String input) {
+        if (input == null) {
+            throw new IllegalArgumentException("Строка не может быть null");
+        }
+
+   
+        Pattern pattern = Pattern.compile("0x[0-9a-fA-F]{8}");
+        Matcher matcher = pattern.matcher(input);
+
+        StringBuffer result = new StringBuffer();
+
+        while (matcher.find()) {
+            String hexString = matcher.group(); 
+            String hexPart = hexString.substring(2);
+
+          
+            long decimal = Long.parseUnsignedLong(hexPart, 16);
+
+            matcher.appendReplacement(result, String.valueOf(decimal));
+        }
+
+        matcher.appendTail(result);
+
+        return result.toString();
