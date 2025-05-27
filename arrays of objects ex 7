@@ -1,0 +1,97 @@
+import java.util.Objects;
+
+public class Main {
+    private String fullName;
+    private int day;
+    private int month;
+    private int year;
+    private int amountInKopecks;
+
+
+    public Main() {
+    }
+
+    // Конструктор с параметрами
+    public Main(String fullName, int day, int month, int year, int amountInKopecks) {
+        this.fullName = fullName;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.amountInKopecks = amountInKopecks;
+    }
+
+    // Геттеры и сеттеры
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getAmountInKopecks() {
+        return amountInKopecks;
+    }
+
+    public void setAmountInKopecks(int amountInKopecks) {
+        this.amountInKopecks = amountInKopecks;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Main)) return false;
+        Main main = (Main) o;
+        return day == main.day &&
+                month == main.month &&
+                year == main.year &&
+                amountInKopecks == main.amountInKopecks &&
+                Objects.equals(fullName, main.fullName);
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fullName, day, month, year, amountInKopecks);
+    }
+
+
+    @Override
+    public String toString() {
+        return "Main{" +
+                "fullName='" + fullName + '\'' +
+                ", date=" + String.format("%02d.%02d.%04d", day, month, year) +
+                ", amountInKopecks=" + amountInKopecks +
+                '}';
+    }
+
+  
+    public static void main(String[] args) {
+        Main payment = new Main("Петров Петр Петрович", 27, 5, 2025, 150000);
+        System.out.println(payment);
+    }
+}
