@@ -1,0 +1,61 @@
+public class FinanceReport {
+    private Payment[] payments;
+    private String reportAuthor;
+    private int reportDay;
+    private int reportMonth;
+    private int reportYear;
+
+    // Конструктор
+    public FinanceReport(String reportAuthor, int reportDay, int reportMonth, int reportYear, int numPayments) {
+        this.reportAuthor = reportAuthor;
+        this.reportDay = reportDay;
+        this.reportMonth = reportMonth;
+        this.reportYear = reportYear;
+        this.payments = new Payment[numPayments];
+    }
+
+    // Метод получения количества платежей
+    public int getPaymentCount() {
+        return payments.length;
+    }
+
+    // Метод получения i-го платежа (чтение)
+    public Payment getPayment(int index) {
+        if (index < 0 || index >= payments.length) {
+            throw new IndexOutOfBoundsException("Недопустимый индекс платежа");
+        }
+        return payments[index];
+    }
+
+    // Метод записи i-го платежа
+    public void setPayment(int index, Payment payment) {
+        if (index < 0 || index >= payments.length) {
+            throw new IndexOutOfBoundsException("Недопустимый индекс платежа");
+        }
+        payments[index] = payment;
+    }
+
+    // toString для отображения отчета
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Finance Report by: ").append(reportAuthor).append("\n");
+        sb.append("Created on: ").append(String.format("%02d.%02d.%04d", reportDay, reportMonth, reportYear)).append("\n");
+        sb.append("Payments:\n");
+        for (int i = 0; i < payments.length; i++) {
+            sb.append("[").append(i).append("] ").append(payments[i]).append("\n");
+        }
+        return sb.toString();
+    }
+
+    // Пример использования
+    public static void main(String[] args) {
+        FinanceReport report = new FinanceReport("Иванов Иван Иванович", 27, 5, 2025, 2);
+        report.setPayment(0, new Payment("Петров Петр", 10, 5, 2025, 100000));
+        report.setPayment(1, new Payment("Сидорова Анна", 12, 5, 2025, 75000));
+
+        System.out.println("Всего платежей: " + report.getPaymentCount());
+        System.out.println("Платеж 0: " + report.getPayment(0));
+        System.out.println("\nПолный отчет:\n" + report);
+    }
+}
