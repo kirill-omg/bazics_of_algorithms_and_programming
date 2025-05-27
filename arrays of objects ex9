@@ -1,0 +1,65 @@
+public class FinanceReport {
+    private Payment[] payments;
+    private String reportAuthor;
+    private int reportDay, reportMonth, reportYear;
+
+    public FinanceReport(String reportAuthor, int reportDay, int reportMonth, int reportYear, int paymentCount) {
+        this.reportAuthor = reportAuthor;
+        this.reportDay = reportDay;
+        this.reportMonth = reportMonth;
+        this.reportYear = reportYear;
+        this.payments = new Payment[paymentCount];
+    }
+
+    public int getPaymentCount() {
+        return payments.length;
+    }
+
+    public Payment getPayment(int index) {
+        if (index < 0 || index >= payments.length) {
+            throw new IndexOutOfBoundsException("Неверный индекс платежа");
+        }
+        return payments[index];
+    }
+
+    public void setPayment(int index, Payment payment) {
+        if (index < 0 || index >= payments.length) {
+            throw new IndexOutOfBoundsException("Неверный индекс платежа");
+        }
+        payments[index] = payment;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("[Автор: %s, дата: %02d.%02d.%04d, Платежи: [\n",
+                reportAuthor, reportDay, reportMonth, reportYear));
+
+        for (Payment payment : payments) {
+            if (payment != null) {
+                int rubles = payment.getAmountInKopecks() / 100;
+                int kopecks = payment.getAmountInKopecks() % 100;
+
+                sb.append(String.format("Плательщик: %s, дата: %02d.%02d.%04d сумма: %d руб. %02d коп.\n",
+                        payment.getFullName(),
+                        payment.getDay(),
+                        payment.getMonth(),
+                        payment.getYear(),
+                        rubles,
+                        kopecks));
+            }
+        }
+
+        sb.append("]]");
+        return sb.toString();
+    }
+
+    // Пример main для теста
+    public static void main(String[] args) {
+        FinanceReport report = new FinanceReport("Иванов Иван", 27, 5, 2025, 2);
+        report.setPayment(0, new Payment("Петров Петр", 10, 5, 2025, 12345));
+        report.setPayment(1, new Payment("Сидорова Анна", 12, 5, 2025, 7500));
+
+        System.out.println(report);
+    }
+}
