@@ -1,0 +1,68 @@
+public class FinanceReport {
+    private Payment[] payments;
+    private String reportAuthor;
+    private int reportDay, reportMonth, reportYear;
+
+    public FinanceReport(String reportAuthor, int reportDay, int reportMonth, int reportYear, int paymentCount) {
+        this.reportAuthor = reportAuthor;
+        this.reportDay = reportDay;
+        this.reportMonth = reportMonth;
+        this.reportYear = reportYear;
+        this.payments = new Payment[paymentCount];
+    }
+
+    public FinanceReport(FinanceReport other) {
+        this.reportAuthor = other.reportAuthor;
+        this.reportDay = other.reportDay;
+        this.reportMonth = other.reportMonth;
+        this.reportYear = other.reportYear;
+        this.payments = new Payment[other.payments.length];
+        for (int i = 0; i < other.payments.length; i++) {
+            if (other.payments[i] != null) {
+                this.payments[i] = new Payment(other.payments[i]); 
+            }
+        }
+    }
+
+    public int getPaymentCount() {
+        return payments.length;
+    }
+
+    public Payment getPayment(int index) {
+        return payments[index];
+    }
+
+    public void setPayment(int index, Payment payment) {
+        payments[index] = payment;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("[Автор: %s, дата: %02d.%02d.%04d, Платежи: [\n",
+                reportAuthor, reportDay, reportMonth, reportYear));
+
+        for (Payment payment : payments) {
+            if (payment != null) {
+                sb.append(payment.toString()).append("\n");
+            }
+        }
+        sb.append("]]");
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        FinanceReport original = new FinanceReport("Иванов И.И.", 27, 5, 2025, 2);
+        original.setPayment(0, new Payment("Петров Петр", 10, 5, 2025, 12345));
+        original.setPayment(1, new Payment("Сидорова Анна", 12, 5, 2025, 7500));
+
+
+        FinanceReport copy = new FinanceReport(original);
+
+  
+        original.getPayment(0).setFullName("ИЗМЕНЕН");
+
+        System.out.println("ОРИГИНАЛ:\n" + original);
+        System.out.println("\nКОПИЯ:\n" + copy);
+    }
+}
