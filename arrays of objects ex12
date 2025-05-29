@@ -1,0 +1,111 @@
+import java.util.*;
+
+public class FinanceReportProcessor {
+
+    // 1. Получение всех платежей по первой букве фамилии
+    public static FinanceReport filterByFirstLetter(FinanceReport report, char firstLetter) {
+        firstLetter = Character.toLowerCase(firstLetter);
+        int count = 0;
+
+        for (int i = 0; i < report.getPaymentCount(); i++) {
+            Payment p = report.getPayment(i);
+            if (p != null && Character.toLowerCase(p.getFullName().charAt(0)) == firstLetter) {
+                count++;
+            }
+        }
+
+        FinanceReport filtered = new FinanceReport(
+                report.getReportAuthor(),
+                report.getReportDay(),
+                report.getReportMonth(),
+                report.getReportYear(),
+                count
+        );
+
+        int index = 0;
+        for (int i = 0; i < report.getPaymentCount(); i++) {
+            Payment p = report.getPayment(i);
+            if (p != null && Character.toLowerCase(p.getFullName().charAt(0)) == firstLetter) {
+                filtered.setPayment(index++, new Payment(p));
+            }
+        }
+
+        return filtered;
+    }
+
+    // 2. Платежи меньше заданной суммы
+    public static FinanceReport filterByAmountLessThan(FinanceReport report, int maxAmountInKopecks) {
+        int count = 0;
+        for (int i = 0; i < report.getPaymentCount(); i++) {
+            Payment p = report.getPayment(i);
+            if (p != null && p.getAmountInKopecks() < maxAmountInKopecks) {
+                count++;
+            }
+        }
+
+        FinanceReport filtered = new FinanceReport(
+                report.getReportAuthor(),
+                report.getReportDay(),
+                report.getReportMonth(),
+                report.getReportYear(),
+                count
+        );
+
+        int index = 0;
+        for (int i = 0; i < report.getPaymentCount(); i++) {
+            Payment p = report.getPayment(i);
+            if (p != null && p.getAmountInKopecks() < maxAmountInKopecks) {
+                filtered.setPayment(index++, new Payment(p));
+            }
+        }
+
+        return filtered;
+    }
+
+    // 3. Суммарный платеж на дату (dd.mm.yy)
+    public static int totalAmountOnDate(FinanceReport report, String dateString) {
+        String[] parts = dateString.split("\\.");
+        if (parts.length != 3) return 0;
+
+        int day = Integer.parseInt(parts[0]);
+        int month = Integer.parseInt(parts[1]);
+        int year = Integer.parseInt(parts[2]);
+        if (year < 100) year += 2000; // преобразование двухзначного года
+
+        int sum = 0;
+        for (int i = 0; i < report.getPaymentCount(); i++) {
+            Payment p = report.getPayment(i);
+            if (p != null && p.getDay() == day && p.getMonth() == month && p.getYear() == year) {
+                sum += p.getAmountInKopecks();
+            }
+        }
+
+        return sum;
+    }
+
+    // 4. Список месяцев без платежей в указанном году
+    public static List<String> monthsWithoutPayments(FinanceReport report, int year) {
+        boolean[] months = new boolean[12]; // январь = 0 ... декабрь = 11
+
+        for (int i = 0; i < report.getPaymentCount(); i++) {
+            Payment p = report.getPayment(i);
+            if (p != null && p.getYear() == year) {
+                months[p.getMonth() - 1] = true;
+            }
+        }
+
+        String[] monthNames = {
+                "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+                "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
+        };
+
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            if (!months[i]) {
+                result.add(monthNames[i]);
+            }
+        }
+
+        return result;
+    }
+}
